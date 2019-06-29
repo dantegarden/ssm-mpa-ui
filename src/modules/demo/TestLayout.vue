@@ -11,46 +11,10 @@
       <el-scrollbar class="sidebar-body">
         <ul class="sidebar-nav-list">
           <li class="sidebar-nav-item">
-            <a class="sidebar-item" :class="{'actived':sidebarActive==='sb-1'}" href="/user/#/profile">
-              <i class="el-icon-news"></i>
-              <span class="sidebar-item-label">个人中心</span>
-            </a>
-          </li>
-          <li class="sidebar-nav-item">
-            <a class="sidebar-item" :class="{'actived':sidebarActive==='sb-2'}" href="/data">
-              <i class="el-icon-tickets"></i>
-              <span class="sidebar-item-label">数据中心</span>
-            </a>
-          </li>
-          <li class="sidebar-nav-item">
-            <a class="sidebar-item" :class="{'actived':sidebarActive==='sb-4'}"  href="/home">
-                <i class="el-icon-phone-outline"></i>
-                <span class="sidebar-item-label">我的工作台</span>
-              </a>
-          </li>
-          <li class="sidebar-nav-item">
-            <a class="sidebar-item" :class="{'actived':sidebarActive==='sb-6'}" href="/components">
-                <i class="el-icon-star-off"></i>
-                <span class="sidebar-item-label">组件仓库</span>
-              </a>
-          </li>
-          <li class="sidebar-nav-item">
-            <a class="sidebar-item" :class="{'actived':sidebarActive==='sb-9'}" href="/login">
-                <i class="el-icon-upload"></i>
-                <span class="sidebar-item-label">登录</span>
-              </a>
-          </li>
-          <li class="sidebar-nav-item">
-            <a class="sidebar-item" :class="{'actived':sidebarActive==='sb-11'}" href="/g2">
-                <i class="el-icon-sold-out"></i>
-                <span class="sidebar-item-label">G2</span>
-              </a>
-          </li>
-          <li class="sidebar-nav-item">
-            <a class="sidebar-item" :class="{'actived':sidebarActive==='sb-12'}" href="/data">
+            <a class="sidebar-item" :class="{'actived':sidebarActive==='sb-20'}" href="/demo">
                 <i class="el-icon-location-outline"></i>
-                <span class="sidebar-item-label">使用说明</span>
-              </a>
+                <span class="sidebar-item-label">示例</span>
+            </a>
           </li>
         </ul>
       </el-scrollbar>
@@ -70,7 +34,6 @@
             </a>
           </el-menu-item> -->
           <el-submenu index="2" >
-
             <span slot="title">快捷操作</span>
             <div style="width:450px">
               <div style="padding: 18px 20px;border-bottom: 1px solid #ebeef5;">
@@ -159,7 +122,7 @@
 </template>
 <script>
 export default {
-  name: "ru-layout",
+  name: "test-layout",
   props: {
     sidebarMini: {
       type: Boolean,
@@ -443,16 +406,16 @@ export default {
   }
 }
 .arrow-down-none{
-            &.el-submenu {
-              .el-icon-arrow-down {
-                &::before {
-                  content: "";
-                }
-              }
-              .el-submenu__icon-arrow{
-                margin-left: 0px;
-              }
-            }
+  &.el-submenu {
+    .el-icon-arrow-down {
+      &::before {
+        content: "";
+      }
+    }
+    .el-submenu__icon-arrow{
+      margin-left: 0px;
+    }
+  }
 }
 .topbar-search{
   .el-input__inner,.el-input-group__append{

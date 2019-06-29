@@ -6,11 +6,11 @@ import _CONST from '@/utils/globalConfig'
 
 // const Login = r => require.ensure([], () => r(require('@/views/login/index')), 'login')
 // 懒加载 - 按组 import
-// const Login = () => import(/* webpackChunkName: "user-group" */ '../views/login/index.vue')
-// const Layout = () => import(/* webpackChunkName: "user-group" */ '../views/layout/index.vue')
-// const Profile = () => import(/* webpackChunkName: "user-group" */ '../views/profile/index.vue')
-// const Key = () => import(/* webpackChunkName: "user-group" */ '../views/key/index.vue')
-// const Security = () => import(/* webpackChunkName: "user-group" */ '../views/security/index.vue')
+// const Login = () => import(/* webpackChunkName: "user-group" */ '../views/login/Layout.vue')
+// const Layout = () => import(/* webpackChunkName: "user-group" */ '../views/layout/Layout.vue')
+// const Profile = () => import(/* webpackChunkName: "user-group" */ '../views/profile/Layout.vue')
+// const Key = () => import(/* webpackChunkName: "user-group" */ '../views/key/Layout.vue')
+// const Security = () => import(/* webpackChunkName: "user-group" */ '../views/security/Layout.vue')
 
 //为了简单发包
 import Profile from '../views/profile/index.vue'

@@ -13,6 +13,10 @@ const portfinder = require('portfinder')
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
 //add
 const entris = require('./entris')
 
@@ -30,13 +34,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       rewrites: [
         // { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
         { from: /\/$/, to: '/home/index.html' },
-        { from: /\/home$/, to: '/home/index.html' },
         { from: /\/login$/, to: '/login/index.html' },
-        { from: /\/notification$/, to: '/notification/index.html' },
+        { from: /\/home$/, to: '/home/index.html' },
         { from: /\/user$/, to: '/user/index.html' },
         { from: /\/data$/, to: '/data/index.html' },
         { from: /\/g2$/, to: '/g2/index.html' },
-        { from: /\/components$/, to: '/components/index.html' }
+        { from: /\/demo$/, to: '/demo/index.html' },  //示例
       ],
     },
     hot: true,
@@ -87,6 +90,7 @@ Object.keys(entris).forEach(function (entry) {
       chunks: ['vendors', entry],
       filename: entry + '/index.html',
       template: 'src/template/index.html',
+      favicon: resolve('favicon.ico'),  //发布时将favicon拷贝到dist下
       inject: true
     })
   )

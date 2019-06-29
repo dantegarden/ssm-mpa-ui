@@ -6,11 +6,11 @@ import _CONST from '@/utils/globalConfig'
 
 // const Login = r => require.ensure([], () => r(require('@/views/login/index')), 'login')
 // 懒加载 - 按组 import
-// const Login = () => import(/* webpackChunkName: "user-group" */ '../views/login/index.vue')
-// const Layout = () => import(/* webpackChunkName: "user-group" */ '../views/layout/index.vue')
-// const Profile = () => import(/* webpackChunkName: "user-group" */ '../views/profile/index.vue')
-// const Key = () => import(/* webpackChunkName: "user-group" */ '../views/key/index.vue')
-// const Security = () => import(/* webpackChunkName: "user-group" */ '../views/security/index.vue')
+// const Login = () => import(/* webpackChunkName: "user-group" */ '../views/login/Layout.vue')
+// const Layout = () => import(/* webpackChunkName: "user-group" */ '../views/layout/Layout.vue')
+// const Profile = () => import(/* webpackChunkName: "user-group" */ '../views/profile/Layout.vue')
+// const Key = () => import(/* webpackChunkName: "user-group" */ '../views/key/Layout.vue')
+// const Security = () => import(/* webpackChunkName: "user-group" */ '../views/security/Layout.vue')
 
 //为了简单发包
 import Index from '../views/index.vue'
@@ -18,9 +18,9 @@ import News from '../views/news/index.vue'
 import Novel from '../views/novel/index.vue'
 import Meitu from '../views/meitu/index.vue'
 import TianQi from '../views/tianqi/index.vue'
-// import Address from '../views/address/index.vue'
-// import Key from '../views/key/index.vue'
-// import Security from '../views/security/index.vue'
+// import Address from '../views/address/Layout.vue'
+// import Key from '../views/key/Layout.vue'
+// import Security from '../views/security/Layout.vue'
 
 Vue.use(VueRouter)
 

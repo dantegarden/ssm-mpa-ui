@@ -9,7 +9,7 @@ import ElementUI from 'element-ui';
 import '@/styles/default.less';
 
 import SvgIcon from '@/components/svg-icon/index.vue';
-import RuLayout from '@/components/layout/index.vue';
+import RuLayout from '@/components/layout/Layout.vue';
 
 Vue.config.productionTip = false
 
@@ -20,7 +20,7 @@ Vue.component(RuLayout.name, RuLayout);
 
 /* eslint-disable no-new */
 const app = new Vue({
- 
+
   render: h => h(App)
 })
 

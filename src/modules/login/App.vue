@@ -11,14 +11,14 @@
         </el-header> -->
         <div class="main-content">
             <div class="container">
-                <el-form ref="form" :model="form" :rules="rules">
+                <el-form ref="form" :model="loginForm" :rules="loginRules">
                     <div class="logo"><svg-icon type="dx-logo" className="svg"/></div>
                     <el-form-item prop="username">
-                        <el-input v-model="form.username" placeholder="账户名称"></el-input>
+                        <el-input v-model="loginForm.username" placeholder="账户名称"></el-input>
                     </el-form-item>
                     <el-form-item prop="password">
-                        <el-input type="password" placeholder="账户密码" v-model="form.password">
-                            <a slot="append" class="forget" href="javascript:;">忘记密码？</a>
+                        <el-input type="password" placeholder="账户密码" v-model="loginForm.password">
+                            <!--<a slot="append" class="forget" href="javascript:;">忘记密码？</a>-->
                         </el-input>
                     </el-form-item>
                     <!-- <el-form-item prop="captchaImage" class="captcha-image">
@@ -28,45 +28,54 @@
                             </el-input>
                         </el-form-item> -->
                     <el-form-item>
-                        <el-button type="primary" @click="submitForm('form')" v-loading.fullscreen.lock="fullscreenLoading">立即登录</el-button>
+                        <el-button type="primary" @click="submitForm()" v-loading.fullscreen.lock="fullscreenLoading">立即登录</el-button>
                     </el-form-item>
                 </el-form>
             </div>
-            <div class="copyright">© 2018 权限管理快速构建平台 版权所有 复星金服</div>
+            <div class="copyright">© 2019 后台管理快速构建平台 版权所有 xxxxx</div>
         </div>
     </el-container>
 </template>
 
 <script>
+import { isvalidUsername } from '@/utils/validate'
+
 export default {
-  name: "user-login",
+  name: "login",
   data() {
+    const validateUsername = (rule, value, callback) => {
+      if (!isvalidUsername(value)) {
+        callback(new Error('请输入正确的用户名'))
+      } else {
+        callback()
+      }
+    }
+    const validatePassword = (rule, value, callback) => {
+      if (value.length < 6) {
+        callback(new Error('请输入至少六位数密码'))
+      } else {
+        callback()
+      }
+    }
     return {
-      form: {
-        username: "admin",
-        password: "123456"
+      loginForm: {
+        username: 'superAdmin',
+        password: 'test1234',
         // captchaImage: ""
       },
-      rules: {
-        username: [
-          {
-            required: true,
-            message: "请输入账户名称",
-            trigger: "blur"
-          }
-        ]
+      loginRules: {
+        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       fullscreenLoading: false
     };
   },
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
+    submitForm() {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           this.fullscreenLoading = true;
-          this.$store
-            .dispatch("login", this.form)
-            .then(() => {
+          this.$store.dispatch("LoginByUsername", this.loginForm).then(() => {
               this.fullscreenLoading = false;
               if (this.$route.query.redirect) {
                 let redirect = decodeURIComponent(this.$route.query.redirect);
@@ -75,14 +84,14 @@ export default {
                 console.log("hash", hash);
                 window.location.href = redirect + hash;
               } else {
-                window.location.href = "/";
+                window.location.href = "/home";
               }
             })
             .catch(() => {
               this.fullscreenLoading = false;
             });
         } else {
-          console.log("error submit!!");
+          console.log("登陆失败!!");
           return false;
         }
       });

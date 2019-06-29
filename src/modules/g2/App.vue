@@ -14,7 +14,7 @@
 </template>
 
 <script>
-// import G2 from "g2";
+import G2 from "g2";
 export default {
   name: "App",
   data() {

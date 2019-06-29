@@ -1,56 +1,69 @@
 // import Cookies from 'js-cookie'
-import { login, logout } from '@/api/login'
-import { userInfo } from '@/api/user'
+import { loginByUsername, logout, getUserInfo } from '@/api/login'
 import { getCookies, setCookies, removeCookies } from '@/utils/cookies'
-import { getStore, setStore, removeStore } from '@/utils/storage'
+import login_store from '../../store'
+import { getStore, setStore } from '@/utils/storage'
 import _CONST from '@/utils/globalConfig'
 
 const state = {
-    token: getCookies(_CONST.TOKEN),
-    userInfo: getStore(_CONST.USER_INFO)
+  token: getCookies(_CONST.TOKEN),
+  userInfo: getStore(_CONST.USER_INFO)
 }
-
 const actions = {
-    ['login']({ commit, dispatch }, user) {
-
-        const loginName = user.loginName.trim()
-
-        return new Promise((resolve, reject) => {
-            login(loginName, user.password).then(response => {
-                const { data: { result: { access_token }, code } } = response
-                //存储登录信息
-                setCookies(_CONST.TOKEN, access_token)
-
-                //登录成功获取用户信息
-                dispatch('userInfo')
-                resolve()
-            }).catch(error => {
-                reject(error)
-            })
-        })
-    },
-    async ['logout']({ commit }) {
-        const { data: { result, code } } = await logout();
-        if (result && code === 200) {
-            removeStore(_CONST.USER_INFO)
-            removeCookies(_CONST.TOKEN)
-        }
-    },
-    async ['userInfo']({ commit }) {
-        const { data: { result, code } } = await userInfo();
-        if (result && code === 200) {
-            commit('setUserInfo', result)
-            setStore(_CONST.USER_INFO, result)
-        }
-    },
+  LoginByUsername({ commit }, userInfo) {
+    const username = userInfo.username.trim()
+    return new Promise((resolve, reject) => {
+      loginByUsername(username, userInfo.password).then(response => {
+        setCookies(_CONST.TOKEN, response.access_token)
+        login_store.dispatch('GetUserInfo')
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+  GetUserInfo({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      getUserInfo().then(response => {
+        commit('SET_USER_INFO', response)
+        setStore(_CONST.USER_INFO, response)  //多页面通信需要依赖localStorage
+        resolve(response)
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+  LogOut({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      logout(state.token).then(() => {
+        commit('SET_TOKEN', '')
+        commit('SET_USER_INFO', {})
+        removeCookies(_CONST.TOKEN)
+        removeStore(_CONST.USER_INFO)
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+  // 前端 登出
+  FedLogOut({ commit }) {
+    return new Promise(resolve => {
+      commit('SET_TOKEN', '')
+      commit('SET_USER_INFO', {})
+      removeCookies(_CONST.TOKEN)
+      removeStore(_CONST.USER_INFO)
+      resolve()
+    })
+  },
 }
-
 const mutations = {
-
-    ['setUserInfo'](state, payload) {
-        state.userInfo = payload
-    }
-
+  SET_TOKEN: (state, token) => {
+    state.token = token
+  },
+  SET_USER_INFO: (state, userInfo) => {
+    state.userInfo = userInfo
+  }
 }
 
 const getters = {

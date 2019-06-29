@@ -10,7 +10,7 @@ import ElementUI from 'element-ui';
 // import 'element-ui/lib/theme-chalk/index.css';
 import '@/styles/default.less';
 
-import RuLayout from '@/components/layout/index.vue';
+import RuLayout from '@/components/layout/Layout.vue';
 import SvgIcon from '@/components/svg-icon/index.vue';
 
 Vue.config.productionTip = false

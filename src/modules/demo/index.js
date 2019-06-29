@@ -2,29 +2,27 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-// import store from './store'
+import ElementUI from 'element-ui';
+import '@/styles/default.less';
 import router from './router'
+import store from './store'
 import { sync } from 'vuex-router-sync'
 
-import ElementUI from 'element-ui';
-// import 'element-ui/lib/theme-chalk/index.css';
-import '@/styles/default.less';
-// import '@/styles/components/user/index.less';
-
 import SvgIcon from '@/components/svg-icon/index.vue';
-
+// import RuLayout from '@/components/layout/Layout.vue'; //共有全局layout，发布项目时切换回来
+import RuLayout from '@/modules/demo/TestLayout.vue';  //私有测试用layout
 
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
 Vue.component(SvgIcon.name, SvgIcon);
+Vue.component(RuLayout.name, RuLayout);
 
-// sync(store, router)
+sync(store, router)
 
-/* eslint-disable no-new */
 const app = new Vue({
+  store,
   router,
-  // store,
   render: h => h(App)
 })
 

@@ -258,8 +258,8 @@
 </ru-layout>
 </template>
 <script>
-export default {
 
+export default {
   data() {
     return {
 
@@ -288,17 +288,6 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
-    handleTip() {
-      this.$notify({
-        title: "提示",
-        dangerouslyUseHTMLString: true,
-        message: '喜欢就 <a style="color:blue;" href="https://github.com/ruyangit/my-vuejs-skye-cli.git">Star</a> 一个吧, [ ^_^ ]',
-        duration: 0,
-        type: "success",
-        position: "bottom-right",
-        showClose: false
-      });
-    }
   },
   mounted() {
     for (var i = 0; i < 60; i++) {
@@ -309,8 +298,7 @@ export default {
         address: "上海市普陀区金沙江路 1518 弄"
       });
     }
-    // this.handleTip();
-  }
+  },
 };
 </script>
 

@@ -11,8 +11,8 @@ import ElementUI from 'element-ui';
 import '@/styles/default.less';
 import '@/styles/components/user.less';
 
-import RuLayout from '@/components/layout/index.vue';
-// import MainHeader from '@/components/header/index.vue';
+import RuLayout from '@/components/layout/Layout.vue';
+// import MainHeader from '@/components/header/Layout.vue';
 import SvgIcon from '@/components/svg-icon/index.vue';
 
 

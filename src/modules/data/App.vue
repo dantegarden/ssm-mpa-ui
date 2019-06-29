@@ -84,12 +84,12 @@
         <div class="data-footer">
          <div class="data-footer-pagination">
            <el-pagination
-  background
-  layout="prev, pager, next"
-  :total="1000">
-</el-pagination>
+              background
+              layout="prev, pager, next"
+              :total="1000">
+            </el-pagination>
          </div>
-          </div>
+        </div>
       </div>
     </div>
   </ru-navbar-inner>
@@ -146,7 +146,7 @@ export default {
   .el-select {
     width: 100px;
   }
-  
+
   .pull-right{
     position: absolute;
     top: 0;
