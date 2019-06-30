@@ -6,11 +6,11 @@
       <el-row class="info-items">
         <el-col :span="24" :lg="12" class="info-item">
           <span class="info-item-label">任务标题：</span>
-          <span class="info-item-value">{dataSource.title}</span>
+          <span class="info-item-value">{{dataSource.title}}</span>
         </el-col>
         <el-col :span="24" :lg="12" class="info-item">
           <span class="info-item-label">店铺名称：</span>
-          <span class="info-item-value">{dataSource.shopName}</span>
+          <span class="info-item-value">{{dataSource.shopName}}</span>
         </el-col>
         <el-col :span="24" :lg="12" class="info-item">
           <span class="info-item-label">任务金额：</span>
@@ -77,7 +77,12 @@ import {
 } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      dataSource: {
+        title: '月销量破万',
+        shopName: '小店ggggg'
+      }
+    };
   },
   computed: {
     ...mapGetters({

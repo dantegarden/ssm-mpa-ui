@@ -10,11 +10,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const { CleanWebpackPlugin }  = require('clean-webpack-plugin');
 
 const env = require('../config/prod.env')
 
 //add
 const entris = require('./entris')
+console.log(entris)
 
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -52,7 +54,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       filename: '[name]/[name].[contenthash:7].css',
       // Setting the following option to `false` will not extract CSS from codesplit chunks.
       // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
-      // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`, 
+      // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
       // increasing file size: https://github.com/vuejs-templates/webpack/issues/1110
       allChunks: true,
     }),
@@ -80,6 +82,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     //   // necessary to consistently work with multiple chunks via CommonsChunkPlugin
     //   chunksSortMode: 'dependency'
     // }),
+    new CleanWebpackPlugin(), //每次打包先清除./dist目录
     // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),
     // enable scope hoisting
@@ -89,13 +92,9 @@ const webpackConfig = merge(baseWebpackConfig, {
       name: 'vendors',
       filename: '[name].[chunkhash:7].js',
       minChunks(module, count) {
-        if (module.resource &&
-          /\.js$/.test(module.resource) &&
-          module.resource.indexOf(
-            path.join(__dirname, '../node_modules')
-          ) === 0) {
-          console.log(module.resource, `import：${count}`);
+        if (module.resource && /\.js$/.test(module.resource) && module.resource.indexOf(path.join(__dirname, '../node_modules')) === 0) {
           //"有正在处理文件" + "这个文件是 .js 后缀" + "这个文件是在 node_modules 中"
+          console.log(module.resource, `import：${count}`);
         }
         return (
           module.resource &&
@@ -105,6 +104,10 @@ const webpackConfig = merge(baseWebpackConfig, {
           ) === 0
         )
       }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      chunks: ['vendor']
     }),
     // extract webpack runtime and module manifest to its own file in order to
     // prevent vendor hash from being updated whenever app bundle is updated
@@ -157,7 +160,7 @@ if (config.build.bundleAnalyzerReport) {
 }
 Object.keys(entris).forEach(function (entry) {
   // const chunks = ['manifest', 'vendors', entry]
-  
+
   // const r2 = require(`../src/modules/` + entry + '/r2.json')
 
   // webpackConfig.plugins.push(
