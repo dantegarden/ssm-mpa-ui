@@ -10,12 +10,19 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-      // '/seed': {
-      //   target: 'http://localhost:9999',
+    proxyTable: { //开发环境在此处配置多个代理
+      '/ssm': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/ssm': '/ssm'
+        }
+      },
+      // '/cms': {
+      //   target: 'http://localhost:8090',
       //   changeOrigin: true,
       //   pathRewrite: {
-      //     '^/seed': '/seed'
+      //     '^/cms': '/cms'
       //   }
       // }
     },
