@@ -89,7 +89,7 @@
                 </el-menu-item>
               </div>
               <div class="btn-list">
-                <a class="btn-list-link" href="#">退出管理控制台</a>
+                <a class="btn-list-link" href="#" @click="logout">退出管理控制台</a>
               </div>
             </div>
           </el-submenu>
@@ -141,6 +141,7 @@
 </template>
 <script>
 import perm from '@/utils/permission'
+import login_store from '@/modules/login/store'
 
 export default {
   name: "ru-layout",
@@ -175,6 +176,9 @@ export default {
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+    },
+    logout(){ //登出
+      login_store.dispatch("LogOut", this.loginForm).then(() => {})
     }
   },
   beforeCreate() {
