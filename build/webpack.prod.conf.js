@@ -154,31 +154,23 @@ if (config.build.productionGzip) {
   )
 }
 
+//打包依赖分析器
 if (config.build.bundleAnalyzerReport) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-  webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+  webpackConfig.plugins.push(new BundleAnalyzerPlugin({
+    analyzerMode: 'server',
+    analyzerPort: 17004,
+    reportFilename: 'report.html',
+    openAnalyzer: true,
+    generateStatsFile: false,
+    statsFilename: 'stats.json',
+    statsOptions: null,
+    logLevel: 'info'
+  }))
 }
+
 Object.keys(entris).forEach(function (entry) {
-  // const chunks = ['manifest', 'vendors', entry]
 
-  // const r2 = require(`../src/modules/` + entry + '/r2.json')
-
-  // webpackConfig.plugins.push(
-  //   new webpack.optimize.CommonsChunkPlugin({
-  //     name: 'axios',
-  //     filename: '[name].[chunkhash:7].js',
-  //     chunks: ['vendors'],
-  //     minChunks(module, count) {
-  //       return (
-  //         module.resource &&
-  //         /\.js$/.test(module.resource) &&
-  //         module.resource.indexOf(
-  //           path.join(__dirname, '../node_modules/axios')
-  //         ) === 0
-  //       )
-  //     }
-  //   })
-  // )
   const chunks = ['vendors',  entry]
   webpackConfig.plugins.push(
     new HtmlWebpackPlugin({

@@ -50,6 +50,12 @@ export default {
         { menuId: 13000, menuName: '图表', path:'/g2', icon:"el-icon-sold-out", children: [] },
       ]
     }
+  },
+  methods:{
+
+  },
+  mounted(){
+    //TODO 取用户有权限看的菜单
   }
 }
 </script>
