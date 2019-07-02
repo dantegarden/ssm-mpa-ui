@@ -1,5 +1,5 @@
 <template>
-  <ru-layout id="app" sidebarActive="sb-11">
+  <ru-layout id="app" sidebarActive="13000">
     <div class="demo-g2">
       <el-row :gutter="20">
         <el-col :span="24" id="c1" class="grid-content"></el-col>

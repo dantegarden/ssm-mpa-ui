@@ -1,5 +1,5 @@
 <template>
-<ru-layout id="app" sidebarActive="sb-2" :sidebarMini="true">
+<ru-layout id="app" sidebarActive="11000" :sidebarMini="true">
   <ru-navbar-inner title="数据中心" :treeData="data">
     <div style="padding:10px">
       <div class="container-block">

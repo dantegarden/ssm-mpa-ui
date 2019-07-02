@@ -1,5 +1,5 @@
 # ssm-mpa-ui
-基于七象[https://github.com/dantegarden/my-vuejs-skye-cli]开发的vue-mpa前端框架
+基于[七象](https://github.com/dantegarden/my-vuejs-skye-cli)开发的vue-mpa前端框架
 
 ### 项目介绍
 
@@ -29,4 +29,4 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-# ssm-mpa-ui
+

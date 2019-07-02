@@ -1,5 +1,5 @@
 <template>
-  <ru-layout id="app" sidebarActive="sb-1">
+  <ru-layout id="app" sidebarActive="10000">
      <ru-navbar-inner title="个人中心" :treeData="data">
        <router-view></router-view>
      </ru-navbar-inner>

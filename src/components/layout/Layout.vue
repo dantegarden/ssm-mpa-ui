@@ -1,48 +1,9 @@
 <template>
 <div class="framework">
   <div class="wrapper " :class="{'sidebar-mini':sidebarMini}">
-    <div class="sidebar">
-      <div class="sidebar-header">
-        <a href=""><svg-icon type="dx-logo" className="logo" /></a>
-      </div>
-      <div class="sidebar-nav-list-divider">
-        <div class="divider"></div>
-      </div>
-      <el-scrollbar class="sidebar-body">
-        <ul class="sidebar-nav-list">
-          <li class="sidebar-nav-item">
-            <a class="sidebar-item" :class="{'actived':sidebarActive==='sb-1'}" href="/user/#/profile">
-              <i class="el-icon-news"></i>
-              <span class="sidebar-item-label">个人中心</span>
-            </a>
-          </li>
-          <li class="sidebar-nav-item">
-            <a class="sidebar-item" :class="{'actived':sidebarActive==='sb-2'}" href="/data">
-              <i class="el-icon-tickets"></i>
-              <span class="sidebar-item-label">数据中心</span>
-            </a>
-          </li>
-          <li class="sidebar-nav-item">
-            <a class="sidebar-item" :class="{'actived':sidebarActive==='sb-4'}"  href="/home">
-                <i class="el-icon-phone-outline"></i>
-                <span class="sidebar-item-label">主页</span>
-              </a>
-          </li>
-          <li class="sidebar-nav-item">
-            <a class="sidebar-item" :class="{'actived':sidebarActive==='sb-11'}" href="/g2">
-                <i class="el-icon-sold-out"></i>
-                <span class="sidebar-item-label">图表</span>
-              </a>
-          </li>
-        </ul>
-      </el-scrollbar>
-      <div class="sidebar-footer" @click="sidebarMini=!sidebarMini">
-        <a class="sidebar-item" href="#">
-            <i class="el-icon-d-arrow-left rotate"></i>
-            <span class="sidebar-item-label">折叠隐藏</span>
-          </a>
-      </div>
-    </div>
+    <sidebar :sidebarMini="sidebarMini" :sidebarActive="sidebarActive"
+             @onSidebarMiniChange="onSidebarMiniChange" @onSidebarActiveChange="onSidebarActiveChange"></sidebar>
+
     <div class="container">
       <div class="topbar">
         <el-menu  mode="horizontal">
@@ -97,43 +58,7 @@
       </div>
       <div class="main-body" :style="'padding:'+mainBodyPadding">
         <slot></slot>
-        <div class="normal-footer" v-show="normalFooter">
-            <div class="container-block" style="margin-bottom: 0px;">
-            <el-row>
-                <el-col :span="4">
-                <a href="#">
-                    <img
-                    src="/static/images/user/ryan.png"
-                    alt=""
-                    class="logo"
-                    />
-                </a>
-                </el-col>
-                <el-col :span="20">
-                <div class="nav">
-                    <a href="#" class="nav-link">
-                    Home
-                    </a>
-                    <a href="#" class="nav-link">
-                    Shop
-                    </a>
-                    <a href="#" class="nav-link">
-                    Blog
-                    </a>
-                    <a href="#" class="nav-link">
-                    Service
-                    </a>
-                    <a href="#" class="nav-link">
-                    About
-                    </a>
-                    <a href="#" class="nav-link" style="margin-right:0px;">
-                    Contact
-                    </a>
-                </div>
-                </el-col>
-            </el-row>
-            </div>
-        </div>
+        <main-footer :normalFooter="normalFooter"></main-footer>
       </div>
     </div>
   </div>
@@ -141,10 +66,16 @@
 </template>
 <script>
 import perm from '@/utils/permission'
+import Sidebar from '@/components/layout/Sidebar/Sidebar'
+import MainFooter from '@/components/layout/Footer/MainFooter'
 import login_store from '@/modules/login/store'
 
 export default {
   name: "ru-layout",
+  components: {
+    Sidebar,
+    MainFooter
+  },
   props: {
     sidebarMini: {
       type: Boolean,
@@ -179,6 +110,12 @@ export default {
     },
     logout(){ //登出
       login_store.dispatch("LogOut", this.loginForm).then(() => {})
+    },
+    onSidebarMiniChange(isCollapse){
+      this.sidebarMini = isCollapse
+    },
+    onSidebarActiveChange(activeMenuIndex){
+      this.sidebarActive = activeMenuIndex
     }
   },
   beforeCreate() {

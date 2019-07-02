@@ -196,4 +196,14 @@ Object.keys(entris).forEach(function (entry) {
   )
 })
 
+function getModuleName(module) {
+  var sign = 'node_modules';
+  var signIndex = module.resource.indexOf(sign);
+  var pathSeparator = module.resource.slice(signIndex - 1, signIndex);
+  var modulePath = module.resource.substring(signIndex + sign.length + 1);
+  var moduleName = modulePath.substring(0, modulePath.indexOf(pathSeparator) );
+  moduleName = moduleName.toLowerCase();
+  return moduleName
+}
+
 module.exports = webpackConfig
