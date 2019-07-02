@@ -18,13 +18,13 @@ module.exports = {
           '^/ssm': '/ssm'
         }
       },
-      '/cms': {
-        target: 'http://localhost:8090',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/cms': '/cms'
-        }
-      }
+      // '/cms': {
+      //   target: 'http://localhost:8090',
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     '^/cms': '/cms'
+      //   }
+      // }
     },
 
     // Various Dev Server settings
