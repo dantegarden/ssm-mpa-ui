@@ -13,7 +13,7 @@ import '@/styles/components/user.less';
 
 import RuLayout from '@/components/layout/Layout.vue';
 // import MainHeader from '@/components/header/Layout.vue';
-import SvgIcon from '@/components/svg-icon/index.vue';
+import SvgIcon from '@/components/svg-icon/SvgIcon.vue';
 
 
 Vue.config.productionTip = false
