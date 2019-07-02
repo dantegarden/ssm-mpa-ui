@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { getCookies } from '@/utils/cookies'
 
-import Dict from '../views/dict/index.vue'
+import Dict from '../views/dict/Dict.vue'
 
 Vue.use(VueRouter)
 
